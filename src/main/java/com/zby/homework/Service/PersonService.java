@@ -2,6 +2,8 @@ package com.zby.homework.Service;
 
 import com.zby.homework.Entity.Person;
 import com.zby.homework.Repository.PersonRepository;
+import com.zby.homework.enums.ResultEnum;
+import com.zby.homework.exception.PersonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +16,9 @@ public class PersonService  {
         Person person = personRepository.findPersonByCode(code);
         Integer age = person.getAge();
         if(age<18){
-            throw new Exception("没有满18");
+            throw new PersonException(ResultEnum.LESS_THAN_18);
         }else if(age>25){
-            throw new Exception("大于25岁");
+            throw new PersonException(ResultEnum.BIGGER_THAN_25);
         }
     }
 }
